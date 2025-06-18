@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dani Debut Invitation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to right, #fff0f5, #ffeef2);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      animation: backgroundAnimation 5s infinite alternate;
+    }
+    @keyframes backgroundAnimation {
+      0% { background: linear-gradient(135deg, #b76e79, #f7e7ce); }
+      100% { background: linear-gradient(135deg, #fdf6ee, #f17496); }
+    }
+    .card {
+      background: #ffffffdd;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+      padding: 40px 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1.2s ease-in-out, pulse 3s infinite;
+      z-index: 2;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+    h1 {
+      font-size: 2em;
+      color: #d98ca6;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, #d98ca6, #f8bfc4, #d98ca6);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s infinite;
+    }
+    @keyframes shimmer { 0% { background-position: 0% } 100% { background-position: 100% } }
+
+    h2 { font-size: 1.5em; color: #5e4c57; margin: 10px 0; }
+    .line { height: 2px; width: 80px; background: #f4c2c2; margin: 20px auto; }
+    .btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #f4a9b8;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .btn:hover { background: #e495a6; }
+    .details {
+      display: none;
+      text-align: left;
+      font-size: 0.95em;
+      margin-top: 20px;
+    }
+    .footer { margin-top: 30px; font-size: 0.8em; color: #888; }
+    audio { display: none; }
+
+    .confetti, .sparkles, #roses-container, #hearts-container {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .confetti-piece, .sparkle, .heart {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+    .confetti-piece {
+      width: 10px; height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+    }
+    .sparkle {
+      width: 4px; height: 4px;
+      background: white;
+      animation: sparkle-move 2s ease-in-out infinite;
+    }
+    @keyframes sparkle-move {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.5); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+    .heart {
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      transform: rotate(45deg);
+      animation: float-heart 5s ease-in-out infinite;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before { top: -7.5px; left: 0; }
+    .heart::after { top: 0; left: -7.5px; }
+
+    @keyframes float-heart {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    .falling-rose {
+      position: absolute;
+      width: 30px;
+      animation: fall-rose linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes fall-rose {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 30px 20px; }
+      h1 { font-size: 1.5em; }
+      h2 { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  
+
+ <audio id="background-music" src="audio.mp3.mp3" autoplay loop></audio>
+
+
+  <div id="confetti" class="confetti"></div>
+  <div id="sparkles" class="sparkles"></div>
+  <div id="roses-container"></div>
+  <div id="hearts-container"></div>
+
+  <div class="card">
+  <h1>🎉 You're Invited 🎉</h1>
+  <div class="line"></div>
+  <p style="font-size: 0.8em;">To celebrate the</p>
+  <h2 style="font-size: 1.2em;">18th Birthday of</h2>
+  <h2 style="font-size: 3.1em;">Dañilla Neri Bersabal</h2>
+
+  
+<a href="index2.html" target="content-frame" title="Click Here" style="
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffc3a0, #ffafbd);
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.85em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  z-index: 3;
+  transition: background 0.3s, transform 0.2s;
+">Click Here</a>
+
+
+
+<div class="details">
+      <p><strong>📅 Date:</strong> June 24, 2025</p>
+      <p><strong>🕕 Time:</strong> 6:00 PM</p>
+      <p><strong>📍 Venue:</strong> House</p>
+      <p><strong>👗 Dress Code:</strong> Formal Outfit</p>
+      <div class="footer">
+        We hope you can join us in this unforgettable celebration ✨
+      </div>
+      <a href="18roses.html" class="btn">View Details</a>
+    </div>
+  </div>
+  <script>
+    function toggleDetails() {
+      const details = document.getElementById("details");
+      details.style.display = details.style.display === "block" ? "none" : "block";
+    }
+
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      for (let i = 0; i < 80; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = ['#fcd5ce', '#ffc8dd', '#ffafcc', '#cdb4db'][Math.floor(Math.random() * 4)];
+        piece.style.animationDelay = Math.random() * 1 + 's';
+        container.appendChild(piece);
+      }
+    }
+
+    function launchSparkles() {
+      const container = document.getElementById('sparkles');
+      for (let i = 0; i < 100; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = `${Math.random() * 3}s`;
+        container.appendChild(sparkle);
+      }
+    }
+
+    function launchHearts() {
+      const container = document.getElementById('hearts-container');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = '100%';
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(heart);
+      }
+    }
+
+    function launchRoses() {
+      const container = document.getElementById('roses-container');
+      setInterval(() => {
+        const rose = document.createElement('img');
+        rose.src = 'https://clipground.com/images/rose-clipart-16.jpg';
+        rose.className = 'falling-rose';
+        rose.style.left = Math.random() * 100 + 'vw';
+        rose.style.animationDuration = (5 + Math.random() * 5) + 's';
+        container.appendChild(rose);
+        setTimeout(() => rose.remove(), 10000);
+      }, 400);
+    }
+
+    window.onload = () => {
+      launchConfetti();
+      launchSparkles();
+      launchRoses();
+      launchHearts();
+    }
+
+    window.addEventListener('click', function () {
+      const music = document.getElementById('bg-music');
+      music.muted = false;
+      if (music.paused) music.play();
+    }, { once: true });
+  </script>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rose Gold Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #5a4b41;
+      display: flex;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      overflow-x: hidden;
+      background: linear-gradient(to right, #fff0f5, #ffeef2);
+      animation: backgroundAnimation 5s infinite alternate;
+    }
+
+    @keyframes backgroundAnimation {
+      0% {
+        background: linear-gradient(135deg, #b76e79, #f7e7ce);
+      }
+      100% {
+        background: linear-gradient(135deg, #fdf6ee, #f17496);
+      }
+    }
+
+    #confetti, #sparkles, #roses-container, #hearts-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background-color: pink;
+      animation: confettiFall 4s linear infinite;
+      border-radius: 50%;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.6;
+      animation: sparkleAnim 3s infinite ease-in-out;
+    }
+
+    .heart {
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      transform: rotate(45deg);
+      animation: float-heart 5s ease-in-out infinite;
+      position: relative;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      border-radius: 50%;
+      position: absolute;
+    }
+    .heart::before { top: -7.5px; left: 0; }
+    .heart::after { top: 0; left: -7.5px; }
+
+    @keyframes confettiFall {
+      to { transform: translateY(100vh) rotate(360deg); }
+    }
+
+    @keyframes sparkleAnim {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes float-heart {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    .falling-rose {
+      position: absolute;
+      width: 30px;
+      height: auto;
+      animation: roseFall linear;
+    }
+
+    @keyframes roseFall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    /* Animation for the invitation card */
+    @keyframes cardAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .invitation-card {
+      background: 
+        radial-gradient(ellipse at top, rgba(224, 182, 167, 0.15) 0%, transparent 70%),
+        linear-gradient(180deg, #fef7f5 0%, #fffdfa 100%);
+      background-origin: padding-box;
+      max-width: 320px; /* Increased max-width */
+      width: 100%;
+      border-radius: 20px;
+      padding: 24px 20px 28px; /* Increased padding */
+      box-shadow: 0 0 12px rgba(224, 182, 167, 0.15), 0 8px 24px rgba(224, 182, 167, 0.12);
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+      animation: cardAnimation 0.6s ease forwards; /* Added animation */
+    }
+
+    .confetti-dots {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 100%;
+      height: 130px;
+      transform: translateX(-50%);
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+    }
+
+    .confetti-dots span {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b76e79, #f7cac9);
+      box-shadow: 0 0 4px rgba(46, 20, 22, 0.6);
+      opacity: 0.8;
+      animation: confettiFall 5s infinite ease-in-out alternate;
+    }
+
+    .confetti-dots span:nth-child(1) { width: 6px; height: 6px; top: 10px; left: 20%; animation-delay: 0s; }
+    .confetti-dots span:nth-child(2) { width: 4px; height: 4px; top: 30px; left: 40%; animation-delay: 1.2s; }
+    .confetti-dots span:nth-child(3) { width: 7px; height: 7px; top: 50px; left: 65%; animation-delay: 0.8s; }
+    .confetti-dots span:nth-child(4) { width: 5px; height: 5px; top: 20px; left: 80%; animation-delay: 2s; }
+    .confetti-dots span:nth-child(5) { width: 3px; height: 3px; top: 70px; left: 30%; animation-delay: 1.6s; }
+    .confetti-dots span:nth-child(6) { width: 4px; height: 4px; top: 80px; left: 55%; animation-delay: 2.8s; }
+    .confetti-dots span:nth-child(7) { width: 6px; height: 6px; top: 60px; left: 75%; animation-delay: 0.5s; }
+    .confetti-dots span:nth-child(8) { width: 5px; height: 5px; top: 40px; left: 15%; animation-delay: 3.3s; }
+
+    .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem; /* Adjusted font size */
+      color: #b76e79;
+      text-align: center;
+      margin: 16px 0 8px; /* Adjusted margin */
+      text-shadow: 0 0 5px rgba(183,110,121,0.7), 0 0 15px rgba(183,110,121,0.3);
+    }
+
+    .subtitle {
+      font-weight: 600;
+      font-size: 0.75rem; /* Adjusted font size */
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      text-align: center;
+      color: #9e8b87;
+      margin-bottom: 12px; /* Adjusted margin */
+    }
+
+    .name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem; /* Adjusted font size */
+      text-align: center;
+      color: #b76e79;
+      margin-bottom: 4px;
+    }
+
+    .description {
+      text-align: center;
+      font-weight: 500;
+      font-size: 0.9rem; /* Adjusted font size */
+      color: #6f5a55;
+      margin-bottom: 24px; /* Adjusted margin */
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 10px; /* Adjusted row gap */
+      border-top: 1px solid #e5d8d7;
+      border-bottom: 1px solid #e5d8d7;
+      padding: 12px 0; /* Adjusted padding */
+      margin-bottom: 20px; /* Adjusted margin */
+    }
+
+    .info-item {
+      text-align: center;
+      font-weight: 600;
+      font-size: 0.85rem; /* Adjusted font size */
+      color: #5a4b41;
+    }
+
+    .info-item small {
+      display: block;
+      font-weight: 400;
+      font-size: 0.65rem; /* Adjusted font size */
+      color: #9e8b87;
+      margin-top: 2px; /* Adjusted margin */
+      text-transform: uppercase;
+    }
+
+    .footer-text {
+      font-size: 0.7rem; /* Adjusted font size */
+      text-align: center;
+      color: #7f6b6b;
+      line-height: 1.0;
+    }
+
+    .button-wrapper {
+      display: flex;
+      justify-content: center; /* Center the button horizontally */
+      margin-top: 20px; /* Add some space above the button */
+    }
+
+    .fancy-btn {
+      background-color: #b76e79; /* Rose gold color */
+      color: white; /* Text color */
+      padding: 10px 20px; /* Padding for the button */
+      border-radius: 5px; /* Rounded corners */
+      text-decoration: none; /* Remove underline */
+      font-weight: bold; /* Bold text */
+      transition: background-color 0.3s; /* Smooth transition for hover effect */
+    }
+
+    .fancy-btn:hover {
+      background-color: #a65d6d; /* Darker shade on hover */
+    }
+
+    @media (min-width: 600px) {
+      .info-grid {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 20px;
+      }
+
+      .title {
+        font-size: 4rem; /* Adjusted for larger screens */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Elements -->
+  <div id="confetti" class="confetti"></div>
+  <div id="sparkles" class="sparkles"></div>
+  <div id="roses-container"></div>
+  <div id="hearts-container"></div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop muted>
+    <source src="audio" type="audio/mpeg" />
+  </audio>
+
+  <!-- Main Invitation Card -->
+  <article class="invitation-card">
+    <div class="confetti-dots" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <h1 class="title">Eighteen</h1>
+    <p class="subtitle">You are invited to</p>
+    <h2 class="name">Dañilla's</h2>
+    <p class="description">18th Birthday Celebration</p>
+
+    <section class="info-group" aria-label="Event details">
+      <div class="info-grid">
+        <div class="info-item">
+          <span>June 22, 2025</span>
+          <small>Date</small>
+        </div>
+        <div class="info-item">
+          <span>2:00 PM</span>
+          <small>Time</small>
+        </div>
+        <div class="info-item">
+          <span>Bersabal Residence</span>
+          <small>Venue</small>
+        </div>
+        <div class="info-item">
+          <span>👗:Pink 👔:WHITE</span>
+          <small>Dress Code: CASUAL OUTFIT</small>
+        </div>
+      </div>
+    </section>
+    <div class="button-wrapper">
+      <a href="18roses.html" class="fancy-btn" target="_blank">View Details</a>
+    </div>
+    <p class="footer-text">
+      We hope you can join us in this unforgettable celebration ✨
+    </p>
+  </article>
+
+  <script>
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      for (let i = 0; i < 80; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = ['#fcd5ce', '#ffc8dd', '#ffafcc', '#cdb4db'][Math.floor(Math.random() * 4)];
+        piece.style.animationDelay = Math.random() * 1 + 's';
+        container.appendChild(piece);
+      }
+    }
+
+    function launchSparkles() {
+      const container = document.getElementById('sparkles');
+      for (let i = 0; i < 100; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = (Math.random() * 3) + 's';
+        container.appendChild(sparkle);
+      }
+    }
+
+    function launchHearts() {
+      const container = document.getElementById('hearts-container');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = '100%';
+        heart.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(heart);
+      }
+    }
+
+    function launchRoses() {
+      const container = document.getElementById('roses-container');
+      setInterval(() => {
+        const rose = document.createElement('img');
+        rose.src = 'https://clipground.com/images/rose-clipart-16.jpg';
+        rose.className = 'falling-rose';
+        rose.style.left = Math.random() * 100 + 'vw';
+        rose.style.animationDuration = (5 + Math.random() * 5) + 's';
+        container.appendChild(rose);
+        setTimeout(() => rose.remove(), 10000);
+      }, 400);
+    }
+
+    function launchFireworks() {
+      const container = document.body; // Fireworks will be added to the body
+      for (let i = 0; i < 10; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
+        firework.style.left = Math.random() * 100 + 'vw';
+        firework.style.top = Math.random() * 100 + 'vh';
+        firework.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(firework);
+        setTimeout(() => firework.remove(), 1000); // Remove firework after animation
+      }
+    }
+
+    window.onload = () => {
+      launchConfetti();
+      launchSparkles();
+      launchRoses();
+      launchHearts();
+      launchFireworks(); // Launch fireworks on load
+    }
+
+    window.addEventListener('click', function () {
+      const music = document.getElementById('bg-music');
+      music.muted = false;
+      if (music.paused) music.play();
+    }, { once: true });
+  </script>
+</body>
+</html>

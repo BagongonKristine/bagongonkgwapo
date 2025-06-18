@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>18 Roses & 19 Candles</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+      background-size: 200% 200%;
+      animation: backgroundAnimation 10s ease infinite;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes backgroundAnimation {
+      0% { background: linear-gradient(135deg, #ffafbd, #ffc3a0); }
+      100% { background: linear-gradient(135deg, #ffc3a0, #ffafbd); }
+    }
+
+    .container {
+      background: #ffffffdd;
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 10px; /* Reduced padding */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 5px; /* Reduced gap */
+      width: 100%;
+      max-width: 750px;
+      overflow: hidden; /* Hide overflowing petals */
+      position: relative; /* Position relative for absolute petals */
+      z-index: 2;
+      animation: fadeIn 1.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .petal {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: url('https://clipground.com/images/rose-clipart-16.jpg') no-repeat center center;
+      background-size: contain;
+      opacity: 0.8;
+      animation: fall 5s linear infinite; /* Falling animation */
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .column {
+      text-align: center;
+    }
+
+    .column h2 {
+      font-size: 1.2em; /* Smaller heading for better fit */
+      margin-bottom: 5px; /* Reduced margin */
+      color: #d63384;
+      font-weight: bold;
+      border-bottom: 2px solid #ffd6e7;
+      padding-bottom: 5px;
+      animation: bounce 1s infinite; /* Added bounce animation */
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-5px); }
+      60% { transform: translateY(-3px); }
+    }
+
+    .name-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjusted min width */
+      gap: 5px; /* Reduced gap */
+      list-style: none;
+      padding: 0;
+    }
+
+    .rose, .candle {
+      background-color: #fff0f6; /* Background color restored */
+      padding: 4px 6px; /* Reduced padding */
+      border-radius: 10px;
+      font-size: 0.7em; /* Smaller font size */
+      font-weight: bold;
+      color: #b03060;
+      text-align: center;
+      display: flex; /* Use flexbox for alignment */
+      justify-content: center; /* Center the content */
+      align-items: center; /* Center the content vertically */
+      animation: fadeInUp 0.5s ease forwards; /* Added fade-in animation */
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .candle {
+      background-color: #ffe5f0; /* Background color for candles */
+      color: #b03060; /* Ensure the same color for candles */
+    }
+
+    @media (max-width: 480px) {
+      .column h2 {
+        font-size: 1em; /* Smaller heading for mobile */
+      }
+      .rose, .candle {
+        font-size: 0.6em; /* Further reduced font size for names */
+        padding: 3px 5px; /* Further reduced padding */
+      }
+      .name-list {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+      }
+    }
+
+    /* Decorations */
+    .confetti, .sparkles, #roses-container, #hearts-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .confetti-piece, .sparkle, .heart {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.8;
+    }
+
+    .confetti-piece {
+      width: 10px; height: 10px;
+      animation: confetti-fall 3s ease-out forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0) rotate(0); opacity: 1; }
+      100% { transform: translateY(600px) rotate(720deg); opacity: 0; }
+    }
+
+    .sparkle {
+      width: 4px; height: 4px;
+      background: white;
+      animation: sparkle-move 2s ease-in-out infinite;
+    }
+
+    @keyframes sparkle-move {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.5); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+
+    .heart {
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      transform: rotate(45deg);
+      animation: float-heart 5s ease-in-out infinite;
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      width: 15px;
+      height: 15px;
+      background: #ff4866;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before { top: -7.5px; left: 0; }
+    .heart::after { top: 0; left: -7.5px; }
+
+    @keyframes float-heart {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+    }
+
+    .falling-rose {
+      position: absolute;
+      width: 30px;
+      animation: fall-rose linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes fall-rose {
+      0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="confetti" class="confetti"></div>
+  <div id="sparkles" class="sparkles"></div>
+  <div id="roses-container"></div>
+  <div id="hearts-container"></div>
+
+  <div class="container">
+    <!-- Petals Animation -->
+    <div id="petals-container"></div>
+
+ <a href="index.html" title="Go Back" style="
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(135deg, #ffc3a0, #ffafbd);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Georgia', serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+  transition: background 0.3s, transform 0.2s;
+">← Back</a>
+
+
+
+    <div class="column">
+      <h2>🌹 18 Roses</h2>
+      <ul class="name-list">
+        <li class="rose">1. Abarquez, Jhonlee</li>
+        <li class="rose">2. Amado, Vincent Jude</li>
+        <li class="rose">3. Anliston, Marlon</li>
+        <li class="rose">4. Bayantong, Kent Roger</li>
+        <li class="rose">5. Dumayao, Jayr</li>
+        <li class="rose">6. Dumayao, Jhon Joshua</li>
+        <li class="rose">7. Docenos, Charls June</li>
+        <li class="rose">8. Fuentes, Clint Stohj</li>
+        <li class="rose">9. Fuentes, Peter Paul</li>
+        <li class="rose">10. Lompon, Zenon</li>
+        <li class="rose">11. Macadag-um, Klenton James</li>
+        <li class="rose">12. Neri, Arckly</li>
+        <li class="rose">13. Neri, Dominador Jr.</li>
+        <li class="rose">14. Neri, Joshua Dev</li>
+        <li class="rose">15. Nesperos, Jasper</li>
+        <li class="rose">16. Nesperos, James</li>
+        <li class="rose">17. Valdez, Christian</li>
+        <li class="rose">18. Ferdinand Bersabal</li>
+      </ul>
+    </div>
+
+    <!-- 18 Candles -->
+    <div class="column">
+      <h2>🕯️ 18 Candles</h2>
+      <ul class="name-list">
+        <li class="candle">1. Anliston, Maria Rosalie</li>
+        <li class="candle">2. Anliston, Princess Mae</li>
+        <li class="candle">3. Aton, Alleah</li>
+        <li class="candle">4. Balaod, Faye</li>
+        <li class="candle">5. Ceballos, Uoiea</li>
+        <li class="candle">6. Daguyo, Angel</li>
+        <li class="candle">7. Flores, Trizhia</li>
+        <li class="candle">8. Bea Febe Gawahan</li>
+        <li class="candle">9. Lahayon, Jazzy Mae</li>
+        <li class="candle">10. Matunhay, Dyan</li>
+        <li class="candle">11. Neri, Algie</li>
+        <li class="candle">12. Neri, Archie</li>
+        <li class="candle">13. Pacheco, Jazmine</li>
+        <li class="candle">14. Palencia, Janice</li>
+        <li class="candle">15. Pascual, Blaisa</li>
+        <li class="candle">16. Perez, Gwen Christine</li>
+        <li class="candle">17. Tinga, Glaze</li>
+        <li class="candle">18. Miraflor Bersabal</li>
+      </ul>
+    </div>
+
+    <!-- 18 Treasures -->
+    <div class="column">
+      <h2>🎁 18 Treasures</h2>
+      <ul class="name-list">
+        <li class="candle">1. Mr. and Mrs. Amurin</li>
+        <li class="candle">2. Mr. and Mrs. Bagongon</li>
+        <li class="candle">3. Mr. and Mrs. Neri</li>
+        <li class="candle">4. Princess Anliston</li>
+        <li class="candle">5. Mrs. Rosalie Anliston</li>
+        <li class="candle">6. Kristine Ligaya Bagongon</li>
+        <li class="candle">7. Algie Mae Neri</li>
+        <li class="candle">8. Angel Daguyo</li>
+        <li class="candle">9. Blaisa Pascual</li>
+        <li class="candle">10. Charls June Docenos</li>
+        <li class="candle">11. Kassandra Sia</li>
+        <li class="candle">12. Kennan Cabiladas</li>
+        <li class="candle">13. Precy Cahuan</li>
+        <li class="candle">14. Tresha Binongcal</li>
+        <li class="candle">15. Jay-Ar De Veyra</li>
+        <li class="candle">16. Gwen Christine Perez</li>
+        <li class="candle">17. Janice Palencia</li>
+        <li class="candle">18. Alleah Aton</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      for (let i = 0; i < 80; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = ['#fcd5ce', '#ffc8dd', '#ffafcc', '#cdb4db'][Math.floor(Math.random() * 4)];
+        piece.style.animationDelay = Math.random() * 1 + 's';
+        container.appendChild(piece);
+      }
+    }
+
+    function launchSparkles() {
+      const container = document.getElementById('sparkles');
+      for (let i = 0; i < 100; i++) {
+        const sparkle = document.createElement('div');
+        sparkle.classList.add('sparkle');
+        sparkle.style.left = Math.random() * 100 + '%';
+        sparkle.style.top = Math.random() * 100 + '%';
+        sparkle.style.animationDelay = `${Math.random() * 3}s`;
+        container.appendChild(sparkle);
+      }
+    }
+
+    function launchHearts() {
+      const container = document.getElementById('hearts-container');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.top = '100%';
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        container.appendChild(heart);
+      }
+    }
+
+    function launchRoses() {
+      const container = document.getElementById('roses-container');
+      setInterval(() => {
+        const rose = document.createElement('img');
+        rose.src = 'https://clipground.com/images/rose-clipart-16.jpg'; // Ensure this URL is valid
+        rose.className = 'falling-rose';
+        rose.style.left = Math.random() * 100 + 'vw';
+        rose.style.animationDuration = (5 + Math.random() * 5) + 's';
+        container.appendChild(rose);
+        setTimeout(() => rose.remove(), 10000);
+      }, 400);
+    }
+
+    function createPetals() {
+      const petalsContainer = document.getElementById('petals-container');
+      setInterval(() => {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+        petal.style.animationDuration = (3 + Math.random() * 5) + 's'; // Random fall duration
+        petalsContainer.appendChild(petal);
+        setTimeout(() => petal.remove(), 6000); // Remove petal after it falls
+      }, 500); // Create a new petal every 500ms
+    }
+
+    window.onload = () => {
+      launchConfetti();
+      launchSparkles();
+      launchRoses();
+      launchHearts();
+      createPetals(); // Start creating petals
+    };
+  </script>
+</body>
+</html>
